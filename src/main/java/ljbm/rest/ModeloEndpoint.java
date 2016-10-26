@@ -18,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import ejb.ModeloEJB;
+import ljbm.ejb.ModeloEJB;
 import ljbm.modelo.Modelo;
 
 @Stateless
@@ -26,17 +26,17 @@ import ljbm.modelo.Modelo;
 public class ModeloEndpoint {
 
 	@EJB
-	private ModeloEJB modeloEJBService;
+	private ModeloEJB eJBService;
 
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path(value = "/")
 	public Response lista() {
 
-		List<Modelo> lista = modeloEJBService.findAll();
-		GenericEntity<List<Modelo>> bookWrapper = 
+		List<Modelo> lista = eJBService.findAll();
+		GenericEntity<List<Modelo>> wrapper = 
 				new GenericEntity<List<Modelo>>(lista) {};
-		return Response.ok(bookWrapper).build();
+		return Response.ok(wrapper).build();
 	}
 
 
@@ -45,7 +45,7 @@ public class ModeloEndpoint {
 	@Path("/{numero:[0-9][0-9]*}")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response findById(@PathParam("numero") Long numero) {
-		Modelo entity = modeloEJBService.findById(numero);
+		Modelo entity = eJBService.findById(numero);
 		if (entity == null) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
@@ -58,7 +58,7 @@ public class ModeloEndpoint {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response insert(final Modelo entity) {
 		
-		Modelo modeloInserido = modeloEJBService.insert(entity);
+		Modelo modeloInserido = eJBService.insert(entity);
 		
 		return Response.ok(modeloInserido).build();
 	}	
@@ -67,18 +67,18 @@ public class ModeloEndpoint {
 	@Path("/{id:[0-9][0-9]*}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response update(Modelo entity) {
-		modeloEJBService.update(entity);
+		eJBService.update(entity);
 		return Response.noContent().build();
 	}
 
 	@DELETE
 	@Path("/{id:[0-9][0-9]*}")
 	public Response deleteById(@PathParam("id") Long id) {
-		Modelo deletableEntity = modeloEJBService.findById(id);
+		Modelo deletableEntity = eJBService.findById(id);
 		if (deletableEntity == null) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
-		modeloEJBService.delete(deletableEntity);
+		eJBService.delete(deletableEntity);
 		return Response.noContent().build();
 	}
 }
