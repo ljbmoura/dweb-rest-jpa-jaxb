@@ -1,4 +1,4 @@
-package ljbm.a_refatorar;
+package ljbm.rest;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -12,7 +12,7 @@ import javax.ws.rs.core.Application;
  * @author luc
  * 
  */
-@ApplicationPath("")
+@ApplicationPath("/rest")
 public class Aplicacao extends Application {
 
 }

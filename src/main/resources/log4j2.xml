@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" name="IPD" >
+	<Properties>
+		<Property name="basedir">${sys:server.output.dir}/logs</Property>
+	</Properties>
+	<Filter type="ThresholdFilter" level="trace" />
+
+	<Appenders>
+		<Console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d (%.9thread) %-50.50c{1} %-5level: %m%n%xEx" charset="UTF-8"/>
+		</Console>
+		
+<!-- 		<RollingRandomAccessFile name="LogGeral" fileName="${basedir}/ipd.log" filePattern="${basedir}/ipd-%i-%d{dd-MM-yyyy}.log.zip"> -->
+<!-- 			<Policies> -->
+<!-- 				<SizeBasedTriggeringPolicy size="25 MB" /> -->
+<!-- 			</Policies> -->
+<!-- 			<PatternLayout pattern="%-5level %d (%.4thread) %c{3}: %m%n%xEx" charset="UTF-8"/> -->
+<!-- 			<DefaultRolloverStrategy min="1" max="10"/> -->
+<!-- 		</RollingRandomAccessFile> -->
+		
+<!-- 		<RollingRandomAccessFile name="LogQuery" fileName="${basedir}/jpa-queries.log" filePattern="${basedir}/jpa-queries-%i-%d{dd-MM-yyyy}.log.zip"> -->
+<!-- 			<Policies> -->
+<!-- 				<SizeBasedTriggeringPolicy size="25 MB" /> -->
+<!-- 			</Policies> -->
+<!-- 			<PatternLayout pattern="%d (%.4thread) %m%n" charset="UTF-8"/> -->
+<!-- 			<DefaultRolloverStrategy min="1" max="10"/> -->
+<!-- 		</RollingRandomAccessFile> -->
+		
+<!-- 		<RollingRandomAccessFile name="LogQueryComDados" fileName="${basedir}/jpa-queries-com-dados.log" filePattern="${basedir}/jpa-queries-com-dados-%i-%d{dd-MM-yyyy}.log.zip"> -->
+<!-- 			<Policies> -->
+<!-- 				<SizeBasedTriggeringPolicy size="25 MB" /> -->
+<!-- 			</Policies> -->
+<!-- 			<PatternLayout pattern="%d (%.4thread) %m%n" charset="UTF-8"/> -->
+<!-- 			<DefaultRolloverStrategy min="1" max="10"/> -->
+<!-- 		</RollingRandomAccessFile> -->
+		
+		<Async name="AsyncSTDOUT">
+			<AppenderRef ref="STDOUT"/> 
+		</Async>
+<!-- 		<Async name="AsyncGeral"> -->
+<!-- 			<AppenderRef ref="LogGeral"/>  -->
+<!-- 		</Async> -->
+<!-- 		<Async name="AsyncJPA"> -->
+<!-- 			<AppenderRef ref="LogQuery"/>  -->
+<!-- 		</Async> -->
+<!-- 		<Async name="AsyncJPADados"> -->
+<!-- 			<AppenderRef ref="LogQueryComDados"/>  -->
+<!-- 		</Async> -->
+	</Appenders>
+
+	<Loggers>
+		<Logger name="ljbm" level="trace" />
+
+<!-- 		<Logger name="org.hibernate" level="info" /> -->
+<!-- 		<Logger name="org.hibernate.SQL" level="debug"> -->
+<!-- 			<AppenderRef ref="AsyncJPA" /> -->
+<!-- 			<AppenderRef ref="AsyncJPADados" /> -->
+<!-- 		</Logger> -->
+		
+<!-- 		<Logger name="org.hibernate.type" level="info" additivity="false"> -->
+<!-- 			<AppenderRef ref="AsyncJPADados" /> -->
+<!-- 		</Logger> -->
+		
+		<Root level="info">
+			<AppenderRef ref="AsyncSTDOUT" />
+<!-- 			<AppenderRef ref="AsyncGeral" /> -->
+		</Root>
+	</Loggers>
+</Configuration>

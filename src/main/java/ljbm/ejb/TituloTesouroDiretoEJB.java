@@ -11,37 +11,38 @@ import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
-import ljbm.modelo.Modelo;
+import ljbm.modelo.TituloTesouroDireto;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class ModeloEJB {
-	private static final Logger LOG = Logger.getLogger(ModeloEJB.class);
+public class TituloTesouroDiretoEJB {
+	private static final Logger LOG = Logger.getLogger(TituloTesouroDiretoEJB.class);
  
 	@PersistenceContext(unitName = "dweb-rest-jpa-jaxb")
     private EntityManager em;
  
     @SuppressWarnings("unchecked")
-	public List<Modelo> findAll() {
-    	LOG.trace("buscando todos");
-    	Query query = em.createQuery("select m FROM Modelo m");
+	public List<TituloTesouroDireto> findAll() {
+    	LOG.trace("buscando todos os titulos TD");
+    	Query query = em.createQuery("select ttd FROM TituloTesouroDireto ttd");
     	return query.getResultList();
     }
 
-    public Modelo findById(Long id) {
-        return em.find(Modelo.class, id);
+    public TituloTesouroDireto findById(Long id) {
+        return em.find(TituloTesouroDireto.class, id);
     }
  
-    public Modelo insert(Modelo entity) {
+    public TituloTesouroDireto insert(TituloTesouroDireto entity) {
+    	LOG.trace("inserindo titulo TD " + entity.toString());
         em.persist(entity);
         return entity;
     }
     
-    public void update(Modelo entity) {
+    public void update(TituloTesouroDireto entity) {
         em.merge(entity);
     }
  
-    public void delete(Modelo deletableEntity) {
+    public void delete(TituloTesouroDireto deletableEntity) {
         em.remove(em.merge(deletableEntity));
     }
 }
