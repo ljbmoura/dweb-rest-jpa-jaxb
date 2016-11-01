@@ -14,10 +14,14 @@ import javax.ws.rs.ext.Provider;
 public class CrossOriginResourceSharingFilter implements ContainerResponseFilter {
 
 	@Override
-	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
-			throws IOException {
+	public void filter(ContainerRequestContext requestContext, ContainerResponseContext cres) throws IOException {
 
-//		responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
-		responseContext.getHeaders().add("Access-Control-Allow-Origin", "http://localhost:3000");
+		// responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
+		cres.getHeaders().add("Access-Control-Allow-Origin", "http://localhost:3000");
+		cres.getHeaders().add("Access-Control-Allow-Headers",
+				"origin, content-type, accept, authorization, X-Requested-With, My-Header");
+		cres.getHeaders().add("Access-Control-Allow-Credentials", "true");
+		cres.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+		cres.getHeaders().add("Access-Control-Max-Age", "1209600");
 	}
 }

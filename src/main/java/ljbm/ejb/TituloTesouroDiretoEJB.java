@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+//import org.apache.logging.log4j.Logger;
 import org.apache.log4j.Logger;
 
 import ljbm.modelo.TituloTesouroDireto;
@@ -16,14 +17,16 @@ import ljbm.modelo.TituloTesouroDireto;
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class TituloTesouroDiretoEJB {
-	private static final Logger LOG = Logger.getLogger(TituloTesouroDiretoEJB.class);
+	private static final Logger log = Logger.getLogger(TituloTesouroDiretoEJB.class);
+	
+//	@Inject Logger log;
  
 	@PersistenceContext(unitName = "dweb-rest-jpa-jaxb")
     private EntityManager em;
  
     @SuppressWarnings("unchecked")
 	public List<TituloTesouroDireto> findAll() {
-    	LOG.trace("buscando todos os titulos TD");
+    	log.trace("buscando todos os titulos TD");
     	Query query = em.createQuery("select ttd FROM TituloTesouroDireto ttd");
     	return query.getResultList();
     }
@@ -33,7 +36,7 @@ public class TituloTesouroDiretoEJB {
     }
  
     public TituloTesouroDireto insert(TituloTesouroDireto entity) {
-    	LOG.trace("inserindo titulo TD " + entity.toString());
+    	log.trace("inserindo titulo TD " + entity.toString());
         em.persist(entity);
         return entity;
     }
