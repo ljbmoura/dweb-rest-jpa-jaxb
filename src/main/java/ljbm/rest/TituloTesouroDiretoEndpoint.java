@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,8 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-//import org.apache.logging.log4j.Logger;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 //import org.glassfish.jersey.client.filter.HttpDigestAuthFilter;
 
 import ljbm.ejb.TituloTesouroDiretoEJB;
@@ -27,10 +27,9 @@ import ljbm.modelo.TituloTesouroDireto;
 @Path(value = "/titulosTD")
 public class TituloTesouroDiretoEndpoint {
 
-	private static final Logger log = Logger.getLogger(TituloTesouroDiretoEndpoint.class);
-	
-//	@Inject Logger log;
-	
+	@Inject
+	private Logger log;
+
 	@EJB
 	private TituloTesouroDiretoEJB eJBService;
 
@@ -42,7 +41,6 @@ public class TituloTesouroDiretoEndpoint {
 		GenericEntity<List<TituloTesouroDireto>> envolucro = new GenericEntity<List<TituloTesouroDireto>>(res) {
 		};
 		log.trace("GET rest/titulosTD/");
-//		return Response.ok(envolucro).header("Access-Control-Allow-Origin", "*").build();
 		return Response.ok(envolucro).build();
 	}
 

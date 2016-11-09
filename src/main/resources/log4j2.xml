@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO" name="IPD" >
+<Configuration status="INFO" name="ljbm" >
 	<Properties>
 		<Property name="basedir">${sys:server.output.dir}/logs</Property>
 	</Properties>
@@ -7,7 +7,7 @@
 
 	<Appenders>
 		<Console name="STDOUT" target="SYSTEM_OUT">
-			<PatternLayout pattern="%d (%.9thread) %-50.50c{1} %-5level: %m%n%xEx" charset="UTF-8"/>
+			<PatternLayout pattern="%d %-30.30c{1} %-5level %m%n%xEx" charset="UTF-8"/>
 		</Console>
 		
 <!-- 		<RollingRandomAccessFile name="LogGeral" fileName="${basedir}/ipd.log" filePattern="${basedir}/ipd-%i-%d{dd-MM-yyyy}.log.zip"> -->
