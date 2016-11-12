@@ -42,7 +42,7 @@ public class AutenticacaoFilter implements ContainerRequestFilter {
 			log.trace("Host chamador: " + httpRequest.getServerName());
 			log.trace("Cabeçalhos da requisição: ");
 			for (Entry<String, List<String>> e : headers.entrySet()) {
-				log.trace(e.getKey() + ": " + e.getValue());
+				log.trace("\t" + e.getKey() + ": " + e.getValue());
 			}
 		}
 		

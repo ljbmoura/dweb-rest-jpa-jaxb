@@ -14,14 +14,13 @@ import javax.ws.rs.ext.Provider;
 
 import org.apache.logging.log4j.Logger;
 
-
 @Provider
 @Priority(Priorities.HEADER_DECORATOR)
 public class CrossOriginResourceSharingFilter implements ContainerResponseFilter {
 
 	@Inject
 	private Logger log;
-	
+
 	@Context
 	private HttpServletRequest httpRequest;
 
@@ -31,7 +30,7 @@ public class CrossOriginResourceSharingFilter implements ContainerResponseFilter
 		String origin = httpRequest.getHeader("Origin");
 		log.trace("Origin: " + origin);
 
-		cres.getHeaders().add("Access-Control-Allow-Origin", "http://localhost:3000");
+		cres.getHeaders().add("Access-Control-Allow-Origin", origin);
 		// cres.getHeaders().add("Access-Control-Allow-Origin", "*");
 		cres.getHeaders().add("Access-Control-Allow-Credentials", true);
 		cres.getHeaders().add("Access-Control-Allow-Headers",
